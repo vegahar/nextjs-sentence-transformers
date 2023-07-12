@@ -3,8 +3,6 @@ from sentence_transformers import SentenceTransformer
 
 app = Flask(__name__)
 model = SentenceTransformer('all-MiniLM-L6-v2')
-
-from sentence_transformers import SentenceTransformer
 #Our sentences we like to encode
 sentence = ['This framework generates embeddings for each input sentence']
 
