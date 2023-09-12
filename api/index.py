@@ -1,19 +1,13 @@
+import os
+
 from flask import Flask
-from sentence_transformers import SentenceTransformer
+from langchain.llms import OpenAI
 
 app = Flask(__name__)
-model = SentenceTransformer('paraphrase-albert-small-v2 ')
-#Our sentences we like to encode
-sentence = ['This framework generates embeddings for each input sentence']
 
-#Sentences are encoded by calling model.encode()
-embeddings = model.encode(sentence)
+@app.route('/')
+def home():
+    llm = OpenAI(temperature=0.9)
+    text = "What would be a good company name a company that makes colorful socks?"
 
-
-@app.route("/api/python")
-def hello_world():
-    return {
-        "Test": "Test",
-        "sentences": sentence,
-        "embeddings": embeddings[0].tolist()
-    }
+    return llm(text)
